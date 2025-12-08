@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MyConn-Web.config Connection String" description="MyConn Connection String used in web.config by the application to access the database." defaultValue="Data Source=SHREYAS\SQLEXPRESS;&#xD;&#xA;                         Initial Catalog=Patch;&#xD;&#xA;                         Integrated Security=True;&#xD;&#xA;                         TrustServerCertificate=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\WebApplication5\\WebApplication5\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyConn']/@connectionString" />
+  </parameter>
+</parameters>

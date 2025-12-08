@@ -1,0 +1,171 @@
+﻿/* =========================
+   Base Layout
+========================= */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+}
+
+/* =========================
+   Variables (Optional)
+========================= */
+:root {
+    --sidebar-bg: #2c3e50;
+    --sidebar-hover: #34495e;
+    --sidebar-active: #4CAF50;
+    --btn-bg: #3498db;
+    --btn-hover: #2980b9;
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --text-color: #2c3e50;
+}
+
+/* =========================
+   Sidebar
+========================= */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2c3e50, #34495e);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    color: white;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+    overflow-y: auto;
+}
+
+    .sidebar .menu-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .sidebar a {
+        display: block;
+        padding: 12px 20px;
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: 0.3s;
+    }
+
+        .sidebar a:hover {
+            background: var(--sidebar-hover);
+        }
+
+        .sidebar a.active {
+            background-color: var(--sidebar-active);
+            color: white;
+        }
+
+/* =========================
+   Main Content
+========================= */
+.main-content,
+.content {
+    margin-left: 240px; /* matches sidebar width */
+    padding: 30px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: var(--text-color);
+}
+
+/* =========================
+   Form Styling
+========================= */
+label {
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    max-width: 280px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 15px;
+    background: var(--input-bg);
+    box-sizing: border-box;
+}
+
+/* =========================
+   Buttons
+========================= */
+#Button1,
+button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 18px;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+    #Button1:hover,
+    button:hover {
+        background: var(--btn-hover);
+    }
+
+/* =========================
+   Responsive Adjustments
+========================= */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content,
+    .content {
+        margin-left: 200px;
+        padding: 20px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .main-content,
+    .content {
+        margin-left: 0;
+        padding: 15px 20px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+        max-width: 100%;
+    }
+}

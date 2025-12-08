@@ -13,6 +13,7 @@ namespace WebApplication5
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
+        static string conStr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,13 +30,13 @@ namespace WebApplication5
         }
         private void BindGrid()
         {
-            string conStr = "Data Source=SHREYAS\\SQLEXPRESS;Initial Catalog=Patch;Integrated Security=True";
+           
 
             try
             {
                 using (SqlConnection con = new SqlConnection(conStr))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM patchmaster", con);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM patchmaster order by PatchID desc", con);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
 
@@ -57,28 +58,33 @@ namespace WebApplication5
         }
         protected void save()
         {
-            string conStr = "Data Source=SHREYAS\\SQLEXPRESS;Initial Catalog=Patch;Integrated Security=True";
-
             int Pachid;
             int Issueid;
 
-            // Fields
-            string pacthnames = pacthname.Text.Trim();
-            string patchinfos = pacthinfo.Text.Trim();
+            // Fields (make sure these IDs exist as server controls)
+            string pacthNameText = pacthname.Text.Trim();
+            string patchInfoText = pacthinfo.Text.Trim();
 
-            DateTime fromdates, todates;
+            DateTime fromDateValue, toDateValue;
 
             bool hasPatchId = int.TryParse(patchid.Text, out Pachid);
             bool hasIssueId = int.TryParse(issueid.Text, out Issueid);
-            bool hasPatchName = !string.IsNullOrWhiteSpace(pacthnames);
-            bool hasPatchFor = !string.IsNullOrWhiteSpace(patchinfos);
+            bool hasPatchName = !string.IsNullOrWhiteSpace(pacthNameText);
+            bool hasPatchFor = !string.IsNullOrWhiteSpace(patchInfoText);
 
-            bool hasFromDate = DateTime.TryParseExact(fromdate.Value, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fromdates);
-            bool hasToDate = DateTime.TryParseExact(todate.Value, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out todates);
+            // Try flexible date parsing — HTML date inputs give yyyy-MM-dd; allow common formats
+            bool hasFromDate = DateTime.TryParse(fromdate.Value, out fromDateValue);
+            bool hasToDate = DateTime.TryParse(todate.Value, out toDateValue);
+
+            // If no inputs → show alert
+            if (!hasPatchId && !hasIssueId && !hasPatchName && !hasPatchFor && !hasFromDate && !hasToDate)
+            {
+                Response.Write("<script>alert('Please enter at least one input');</script>");
+                return;
+            }
 
             // ---------- BUILD DYNAMIC QUERY ----------
             string query = "SELECT * FROM patchmaster WHERE 1=1";
-
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             if (hasPatchId)
@@ -96,36 +102,43 @@ namespace WebApplication5
             if (hasPatchName)
             {
                 query += " AND PatchName LIKE @pacthname";
-                parameters.Add(new SqlParameter("@pacthname", "%" + pacthnames + "%"));
+                parameters.Add(new SqlParameter("@pacthname", "%" + pacthNameText + "%"));
             }
 
             if (hasPatchFor)
             {
                 query += " AND Patch_For LIKE @patchinfos";
-                parameters.Add(new SqlParameter("@patchinfos", "%" + patchinfos + "%"));
+                parameters.Add(new SqlParameter("@patchinfos", "%" + patchInfoText + "%"));
             }
 
             if (hasFromDate && hasToDate)
             {
+                // Use BETWEEN when both provided
                 query += " AND ReleaseDate BETWEEN @fromdate AND @todate";
-                parameters.Add(new SqlParameter("@fromdate", fromdates));
-                parameters.Add(new SqlParameter("@todate", todates));
+                parameters.Add(new SqlParameter("@fromdate", fromDateValue.Date));
+                parameters.Add(new SqlParameter("@todate", toDateValue.Date));
+            }
+            else if (hasFromDate) // single-sided range
+            {
+                query += " AND ReleaseDate >= @fromdate";
+                parameters.Add(new SqlParameter("@fromdate", fromDateValue.Date));
+            }
+            else if (hasToDate)
+            {
+                query += " AND ReleaseDate <= @todate";
+                parameters.Add(new SqlParameter("@todate", toDateValue.Date));
             }
 
-            // If no inputs → show alert
-            if (!hasPatchId && !hasIssueId && !hasPatchName && !hasPatchFor && !hasFromDate && !hasToDate)
-            {
-                Response.Write("<script>alert('Please enter at least one input');</script>");
-                return;
-            }
+            // final ordering
+            query += " ORDER BY PatchID DESC";
 
             // ---------- RUN QUERY ----------
             try
             {
                 using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    SqlCommand cmd = new SqlCommand(query, con);
-
+                    cmd.CommandType = CommandType.Text;
                     foreach (var p in parameters)
                         cmd.Parameters.Add(p);
 
@@ -140,7 +153,7 @@ namespace WebApplication5
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "\\'") + "');</script>");
             }
         }
 

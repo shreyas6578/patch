@@ -17,7 +17,7 @@
         <h3 class="menu-title">Patch Menu</h3>
         <a href="WebForm1.aspx"class="active">Add Patch</a>
         <a href="WebForm2.aspx">View Patch</a>
-        <a href="#">Update Patch</a>
+        <a href="WebForm3.aspx">Update Patch</a>
         <a href="#">Delete Patch</a>
     </div>
 
@@ -65,16 +65,7 @@
 <asp:Label ID="Label3" runat="server" Text="Project: "></asp:Label>
 <asp:DropDownList ID="ProjectList" runat="server">
     <asp:ListItem Text="-- Select Project --" Value=""></asp:ListItem>
-    <asp:ListItem Text="ADF" Value="ADF"></asp:ListItem>
-    <asp:ListItem Text="Cloud Convertor" Value="Cloud Convertor"></asp:ListItem>
-    <asp:ListItem Text="JJ CORE" Value="JJ CORE"></asp:ListItem>
-    <asp:ListItem Text="MARG" Value="MARG"></asp:ListItem>
-    <asp:ListItem Text="PorClaimz" Value="PorClaimz"></asp:ListItem> 
-    <asp:ListItem Text="ProClaimz 2.0" Value="ProClaimz 2.0"></asp:ListItem> 
-    <asp:ListItem Text="MDM" Value="MDM"></asp:ListItem> 
-    <asp:ListItem Text="ZylemMIS" Value="ZylemMIS"></asp:ListItem>
-    <asp:ListItem Text="ZylemMIN" Value="ZylemMIN"></asp:ListItem>
-    <asp:ListItem Text="OTHER" Value="OTHER"></asp:ListItem>
+ 
 </asp:DropDownList>
 
 <asp:RequiredFieldValidator 
@@ -143,10 +134,6 @@ $(function () {
 <asp:Label ID="Label6" runat="server" Text="Environment: "></asp:Label>
 <asp:DropDownList ID="EnvironmentList" runat="server">
     <asp:ListItem Text="-- Select Environment --" Value=""></asp:ListItem>
-    <asp:ListItem Text="UAT" Value="UAT"></asp:ListItem>
-    <asp:ListItem Text="LIVE" Value="LIVE"></asp:ListItem>
-    <asp:ListItem Text="UAT and LIVE" Value="UAT and LIVE">
-    </asp:ListItem> <asp:ListItem Text="OTHER" Value="OTHER"></asp:ListItem>
 </asp:DropDownList>
 
 <asp:RequiredFieldValidator 
@@ -185,8 +172,6 @@ $(function () {
 <asp:Label ID="Label10" runat="server" Text="Type: "></asp:Label>
 <asp:DropDownList ID="TypeList" runat="server">
     <asp:ListItem Text="-- Select Type --" Value=""></asp:ListItem>
-    <asp:ListItem Text="BUG" Value="BUG"></asp:ListItem>
-    <asp:ListItem Text="New Deployment" Value="New Deployment"></asp:ListItem>
 </asp:DropDownList>
 
 <asp:ValidationSummary 
