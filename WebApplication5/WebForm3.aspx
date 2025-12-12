@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Enter Patch Detail</title>
-
+    <title>Update Patch Detail</title>
     <link rel="stylesheet" type="text/css" href="css/StyleSheet1.css" />
     <link rel="stylesheet" type="text/css" href="css/gridview.css" />
+    <link rel="stylesheet" type="text/css" href="css/Datepicker.css" />
     <script src="JS/JavaScript.js"></script>
 
     <!-- jQuery UI Datepicker CSS -->
@@ -29,14 +29,14 @@
     </div>
 
     <form id="form3" runat="server">
-        <div class="main-content">
-
+        <div class="content">
+           <di+ class="form-grid">
             <!-- Patch ID -->
             <asp:Label ID="label1" runat="server" Text="Patch ID :"></asp:Label>
-            <asp:TextBox ID="patchid" runat="server"></asp:TextBox>
-
+            <asp:TextBox ID="patchid" runat="server" class="form-control"></asp:TextBox>
+            </di+>
             <!-- Search Button -->
-            <asp:Button ID="Button1" runat="server" Text="Search Patch" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="Search Patch" OnClick="Button1_Click" CssClass="btn-submit" />
 
             <!-- Patch ID validators -->
             <asp:RegularExpressionValidator 
@@ -57,6 +57,7 @@
                 ForeColor="Red" />
 
             <!-- Deployment Status -->
+          
             <asp:Label ID="labelDeployOption" runat="server" Text="Select Deployment Status:" />
             <asp:DropDownList ID="deployStatus" runat="server" AutoPostBack="true">
                 <asp:ListItem Value="">-- Select --</asp:ListItem>
@@ -66,8 +67,9 @@
             <asp:Label ID ="label" runat="server" Text=""
                visible="false"
                 ></asp:Label>
+      
             <br /><br />
-
+  </div>
             <!-- GridView -->
             <asp:GridView ID="GridView1" runat="server"
                 AutoGenerateColumns="False"
@@ -94,7 +96,7 @@
 
             </asp:GridView>
 
-        </div>
+
     </form>
 
 </body>

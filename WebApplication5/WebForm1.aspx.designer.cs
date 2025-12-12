@@ -66,7 +66,7 @@ namespace WebApplication5
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ClientName;
+        protected global::System.Web.UI.WebControls.DropDownList ClientName;
 
         /// <summary>
         /// RequiredFieldValidator2 control.
@@ -294,13 +294,13 @@ namespace WebApplication5
         protected global::System.Web.UI.WebControls.DropDownList TypeList;
 
         /// <summary>
-        /// ValidationSummary1 control.
+        /// RequiredFieldValidator12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
 
         /// <summary>
         /// labelDeployOption control.
@@ -319,6 +319,15 @@ namespace WebApplication5
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList deployStatus;
+
+        /// <summary>
+        /// patchIDContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl patchIDContainer;
 
         /// <summary>
         /// Label12 control.
@@ -355,6 +364,15 @@ namespace WebApplication5
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+
+        /// <summary>
+        /// deployedContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl deployedContainer;
 
         /// <summary>
         /// Label9 control.

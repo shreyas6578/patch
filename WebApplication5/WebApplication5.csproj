@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\gridview.css" />
+    <Content Include="css\Datepicker.css" />
     <Content Include="css\StyleSheet1.css" />
     <Content Include="Global.asax" />
     <Content Include="JS\JavaScript.js" />

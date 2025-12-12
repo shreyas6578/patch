@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -17,10 +18,31 @@ namespace WebApplication5
         {
             if (!IsPostBack)
             {
+                getClientName();
                 BindProjectList();
                 Enviroment();
                 Type();
             }
+        }
+        private void getClientName()
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "SELECT ClientID, (ClientName + ' (' + ClientAlias + ')') AS NAMES FROM ClientMaster";
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    ClientName.DataSource = dr;
+                    ClientName.DataTextField = "NAMES";      // What user sees
+                    ClientName.DataValueField = "ClientID";  // Actual value stored
+                    ClientName.DataBind();
+                }
+            }
+
+            // Default item
         }
 
         // ------------------------- Bind Project Names -------------------------
@@ -28,21 +50,18 @@ namespace WebApplication5
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "SELECT Name FROM Settings WHERE id = 'project_names'";
+                string query = "SELECT Description FROM SubGroupMaster WHERE GroupType = 'Project' ORDER BY Description";
+
                 SqlCommand cmd = new SqlCommand(query, con);
-
                 con.Open();
-                object rawValue = cmd.ExecuteScalar();
 
-                if (rawValue != null)
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
                 {
-                    string names = rawValue.ToString();   // Example: "ADF,Cloud Convertor,JJ CORE"
-                    string[] items = names.Split(',')
-                                          .Select(x => x.Trim())
-                                          .Where(x => x.Length > 0)
-                                          .ToArray();
-
-                    ProjectList.DataSource = items;
+                    ProjectList.DataSource = dr;
+                    ProjectList.DataTextField = "Description";   // What user sees
+                    ProjectList.DataValueField = "Description";  // What value is stored
                     ProjectList.DataBind();
                 }
             }
@@ -50,26 +69,24 @@ namespace WebApplication5
             ProjectList.Items.Insert(0, new ListItem("-- Select Project --", ""));
         }
 
+
         // ------------------------- Bind Environments -------------------------
         private void Enviroment()
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "SELECT Name FROM Settings WHERE id = 'Environment'";
+                string query = "SELECT Description FROM SubGroupMaster WHERE GroupType = 'Environment' ORDER BY Description";
+
                 SqlCommand cmd = new SqlCommand(query, con);
-
                 con.Open();
-                object rawValue = cmd.ExecuteScalar();
 
-                if (rawValue != null)
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
                 {
-                    string names = rawValue.ToString();
-                    string[] items = names.Split(',')
-                                          .Select(x => x.Trim())
-                                          .Where(x => x.Length > 0)
-                                          .ToArray();
-
-                    EnvironmentList.DataSource = items;
+                    EnvironmentList.DataSource = dr;
+                    EnvironmentList.DataTextField = "Description";   // What user sees
+                    EnvironmentList.DataValueField = "Description";  // What value is stored
                     EnvironmentList.DataBind();
                 }
             }
@@ -81,21 +98,18 @@ namespace WebApplication5
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "SELECT Name FROM Settings WHERE id = 'Type'";
+                string query = "SELECT Description FROM SubGroupMaster WHERE GroupType = 'Type' ORDER BY Description";
+
                 SqlCommand cmd = new SqlCommand(query, con);
-
                 con.Open();
-                object rawValue = cmd.ExecuteScalar();
 
-                if (rawValue != null)
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
                 {
-                    string names = rawValue.ToString();
-                    string[] items = names.Split(',')
-                                          .Select(x => x.Trim())
-                                          .Where(x => x.Length > 0)
-                                          .ToArray();
-
-                    TypeList.DataSource = items;
+                    TypeList.DataSource = dr;
+                    TypeList.DataTextField = "Description";   // What user sees
+                    TypeList.DataValueField = "Description";  // What value is stored
                     TypeList.DataBind();
                 }
             }
@@ -108,51 +122,61 @@ namespace WebApplication5
         {
             bool show = deployStatus.SelectedValue == "patchdeployed";
 
-            Label9.Visible = show;
-            deployed.Visible = show;
-            RequiredFieldValidator9.Visible = show;
+            // Show/hide the containers
+            patchIDContainer.Visible = show;
+            deployedContainer.Visible = show;
 
-            Label12.Visible = show;
-            patchID.Visible = show;
-            RequiredFieldValidator11.Visible = show;
-            RegularExpressionValidator1.Visible = show;
+            // Enable/disable validators
+            RequiredFieldValidator9.Enabled = show;
+            RequiredFieldValidator11.Enabled = show;
+            RegularExpressionValidator1.Enabled = show;
         }
-
 
         // ------------------------- Submit Button -------------------------
         protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-                string clientname = ClientName.Value;
+                string clientname = ClientName.SelectedValue;
                 string project_name = ProjectList.SelectedValue;
                 string patch_for = project_name;
-
                 int Issueid = Convert.ToInt32(issueid.Value);
                 string environment = EnvironmentList.SelectedValue;
                 string patch_name = NameText.Value;
                 string patch_info = PatchInfo1.Value;
                 string TypeLists = TypeList.SelectedValue;
                 string releasedBy = ReleasedBy.Value;
-
-                string testingStatus = ""; // default
+                string testingStatus = "";
 
                 DateTime deployDateValue = DateTime.ParseExact(deployDate.Value, "dd-MM-yyyy", null);
                 DateTime releaseDateValue = DateTime.ParseExact(ReleaseDate.Value, "dd-MM-yyyy", null);
 
+                string generatedPatchName = "";
+
+                // ----------- Generate PatchName (MaxID + "_" + PatchName) -----------
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT ISNULL(MAX(PatchID),0) FROM PatchMaster", con);
+                    con.Open();
+                    int maxId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    generatedPatchName = (maxId + 1) + "_" + patch_name;
+                }
+
+                // ----------- Insert Patch Record -----------
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     string query = @"
-                    INSERT INTO PatchMaster 
-                    (PatchName, Patch_For, Type, IssueID, Client, ReleaseDate,
-                     DeploymentDate, Environment, ReleasedBy, TestingStatus, ProjectName) 
-                    VALUES 
-                    (@PatchName, @Patch_For, @Type, @IssueID, @Client, @ReleaseDate, 
-                     @DeploymentDate, @Environment, @ReleasedBy, @TestingStatus, @ProjectName);";
+            INSERT INTO PatchMaster 
+            (PatchName, Patch_For, Type, IssueID, Client, ReleaseDate,
+             DeploymentDate, Environment, ReleasedBy, TestingStatus, ProjectName) 
+            VALUES 
+            (@PatchName, @Patch_For, @Type, @IssueID, @Client, @ReleaseDate, 
+             @DeploymentDate, @Environment, @ReleasedBy, @TestingStatus, @ProjectName);";
 
                     SqlCommand cmd = new SqlCommand(query, con);
 
-                    cmd.Parameters.AddWithValue("@PatchName", patch_name);
+                    cmd.Parameters.AddWithValue("@PatchName", generatedPatchName);
                     cmd.Parameters.AddWithValue("@Patch_For", patch_for);
                     cmd.Parameters.AddWithValue("@Type", TypeLists);
                     cmd.Parameters.AddWithValue("@IssueID", Issueid);
@@ -168,7 +192,7 @@ namespace WebApplication5
                     cmd.ExecuteNonQuery();
                 }
 
-                output.Text = "Patch saved successfully!";
+                output.Text = "Patch saved successfully!.<br/>"+ generatedPatchName;
                 output.ForeColor = System.Drawing.Color.Green;
             }
             catch (FormatException ex)
