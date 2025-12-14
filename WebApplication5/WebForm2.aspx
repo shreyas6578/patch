@@ -92,7 +92,7 @@
   <br />
         <!-- Button -->
         <asp:Button ID="Button1" runat="server" Text="Search Patch" onclick="Button1_Click" CssClass="btn-submit"/>
-        <br /><br />
+        <asp:Label ID="errorlabel" runat="server" Text="" CssClass="output-message" Visible="false"></asp:Label>
      <asp:GridView ID="GridView1" runat="server"
         AutoGenerateColumns="False"
         AllowPaging="True"

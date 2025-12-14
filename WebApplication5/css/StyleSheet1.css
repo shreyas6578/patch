@@ -80,17 +80,18 @@ body {
 ========================= */
 .content {
     margin-left: 250px;
-    padding: 40px;
+    padding: 20px 40px;
     min-height: 100vh;
     background: rgba(255, 255, 255, 0.95);
 }
 
 h2 {
+    margin-top: 0;
     color: var(--text-color);
     margin-bottom: 30px;
     font-size: 28px;
     font-weight: 600;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     border-bottom: 2px solid #eee;
 }
 
@@ -290,3 +291,4 @@ h2 {
     cursor: pointer;
     background-color: white;
 }
+

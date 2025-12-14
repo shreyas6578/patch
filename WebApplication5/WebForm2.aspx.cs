@@ -75,12 +75,14 @@ namespace WebApplication5
             // Try flexible date parsing — HTML date inputs give yyyy-MM-dd; allow common formats
             bool hasFromDate = DateTime.TryParse(fromdate.Value, out fromDateValue);
             bool hasToDate = DateTime.TryParse(todate.Value, out toDateValue);
-
+            errorlabel.Visible = false;
             // If no inputs → show alert
             if (!hasPatchId && !hasIssueId && !hasPatchName && !hasPatchFor && !hasFromDate && !hasToDate)
             {
-                Response.Write("<script>alert('Please enter at least one input');</script>");
-                return;
+                errorlabel.Visible = true;
+                errorlabel.Text = "Please enter at least one input";
+                errorlabel.ForeColor = System.Drawing.Color.Red;
+    
             }
 
             // ---------- BUILD DYNAMIC QUERY ----------

@@ -56,7 +56,7 @@
                 <div class="grid-item">
                     <asp:Label ID="Label3" runat="server" Text="Project:"></asp:Label>
                     <asp:DropDownList ID="ProjectList" runat="server" CssClass="dropdown">
-                        <asp:ListItem Text="-- Select Project --" Value=""></asp:ListItem>
+                        <asp:ListItem Text="-- Select Project---" Value=""></asp:ListItem>
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
                         ControlToValidate="ProjectList" InitialValue=""

@@ -26,10 +26,12 @@ namespace WebApplication5
         }
         private void getClientName()
         {
+            ClientName.Items.Clear(); // safety
+
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = @"SELECT ClientID, 
-                        (ClientName + ' (' + ClientAlias + ')') AS NAMES 
+                string query = @"SELECT ClientID,
+                        (ClientName + ' (' + ClientAlias + ')') AS NAMES
                         FROM ClientMaster";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
@@ -45,9 +47,9 @@ namespace WebApplication5
                 }
             }
 
-            // Default item
             ClientName.Items.Insert(0, new ListItem("-- Select Client --", ""));
         }
+
 
 
         // ------------------------- Bind Project Names -------------------------

@@ -1,0 +1,153 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\shreyas\\source\\repos\\patch\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|c:\\users\\shreyas\\source\\repos\\patch\\webapplication5\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|C:\\Users\\shreyas\\source\\repos\\patch\\webapplication5\\webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|c:\\users\\shreyas\\source\\repos\\patch\\webapplication5\\webform3.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\webform3.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|C:\\Users\\shreyas\\source\\repos\\patch\\webapplication5\\webform2.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\webform2.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|C:\\Users\\shreyas\\source\\repos\\patch\\webapplication5\\webform1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\webform1.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|C:\\Users\\shreyas\\source\\repos\\patch\\webapplication5\\webform2.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\webform2.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|C:\\Users\\shreyas\\source\\repos\\patch\\webapplication5\\css\\stylesheet1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\css\\stylesheet1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|C:\\Users\\shreyas\\source\\repos\\patch\\webapplication5\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{204553D2-8F28-494F-B5EC-0B71A7DC2EBC}|WebApplication5\\WebApplication5.csproj|solutionrelative:webapplication5\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WebForm2.aspx",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm2.aspx",
+              "RelativeDocumentMoniker": "WebApplication5\\WebForm2.aspx",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm2.aspx",
+              "RelativeToolTip": "WebApplication5\\WebForm2.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-12-14T07:29:29.022Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\Global.asax.cs",
+              "RelativeDocumentMoniker": "WebApplication5\\Global.asax.cs",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\Global.asax.cs",
+              "RelativeToolTip": "WebApplication5\\Global.asax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T12:55:16.901Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\Web.config",
+              "RelativeDocumentMoniker": "WebApplication5\\Web.config",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\Web.config",
+              "RelativeToolTip": "WebApplication5\\Web.config",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAYwBgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-12-14T07:30:53.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WebForm2.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm2.aspx.cs",
+              "RelativeDocumentMoniker": "WebApplication5\\WebForm2.aspx.cs",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm2.aspx.cs",
+              "RelativeToolTip": "WebApplication5\\WebForm2.aspx.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAqwFQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T07:29:28.424Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WebForm1.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm1.aspx.cs",
+              "RelativeDocumentMoniker": "WebApplication5\\WebForm1.aspx.cs",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm1.aspx.cs",
+              "RelativeToolTip": "WebApplication5\\WebForm1.aspx.cs",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAqwCsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T07:29:28.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WebForm1.aspx",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm1.aspx",
+              "RelativeDocumentMoniker": "WebApplication5\\WebForm1.aspx",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm1.aspx",
+              "RelativeToolTip": "WebApplication5\\WebForm1.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-12-14T07:29:28.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WebForm3.aspx",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm3.aspx",
+              "RelativeDocumentMoniker": "WebApplication5\\WebForm3.aspx",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\WebForm3.aspx",
+              "RelativeToolTip": "WebApplication5\\WebForm3.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-12-14T07:29:28.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StyleSheet1.css",
+              "DocumentMoniker": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\css\\StyleSheet1.css",
+              "RelativeDocumentMoniker": "WebApplication5\\css\\StyleSheet1.css",
+              "ToolTip": "C:\\Users\\shreyas\\source\\repos\\patch\\WebApplication5\\css\\StyleSheet1.css",
+              "RelativeToolTip": "WebApplication5\\css\\StyleSheet1.css",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAAAK4AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-14T07:29:29.177Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

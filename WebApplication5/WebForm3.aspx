@@ -30,46 +30,48 @@
 
     <form id="form3" runat="server">
         <div class="content">
-           <di+ class="form-grid">
-            <!-- Patch ID -->
-            <asp:Label ID="label1" runat="server" Text="Patch ID :"></asp:Label>
-            <asp:TextBox ID="patchid" runat="server" class="form-control"></asp:TextBox>
-            </di+>
-            <!-- Search Button -->
-            <asp:Button ID="Button1" runat="server" Text="Search Patch" OnClick="Button1_Click" CssClass="btn-submit" />
+            <h2>Update Patch Details</h2>
+           <div class="form-grid">
+                <div class="grid-item">
+                    <!-- Patch ID -->
+                    <asp:Label ID="label1" runat="server" Text="Patch ID :"></asp:Label>
+                    <asp:TextBox ID="patchid" runat="server" class="form-control" ></asp:TextBox>
+                    
+                    <!-- Patch ID validators -->
+                    <asp:RegularExpressionValidator 
+                        ID="revPatchID" 
+                        runat="server" 
+                        ControlToValidate="patchid"
+                        ErrorMessage="Enter numbers only"
+                        ValidationExpression="^\d+$"
+                        ForeColor="Red"
+                        Display="Dynamic" />
 
-            <!-- Patch ID validators -->
-            <asp:RegularExpressionValidator 
-                ID="revPatchID" 
-                runat="server" 
-                ControlToValidate="patchid"
-                ErrorMessage="Enter numbers only"
-                ValidationExpression="^\d+$"
-                ForeColor="Red"
-                Display="Dynamic" />
-
-            <asp:RequiredFieldValidator 
-                ID="RequiredFieldValidator6"
-                runat="server"
-                ControlToValidate="patchid"
-                InitialValue=""
-                ErrorMessage="* Required"
-                ForeColor="Red" />
-
-            <!-- Deployment Status -->
+                    <asp:RequiredFieldValidator 
+                        ID="RequiredFieldValidator6"
+                        runat="server"
+                        ControlToValidate="patchid"
+                        InitialValue=""
+                        ErrorMessage="* Required"
+                        ForeColor="Red" />
+                </div>
+                
+                <!-- Deployment Status -->
+                <div class="grid-item">
+                    <asp:Label ID="labelDeployOption" runat="server" Text="Select Deployment Status:" />
+                    <asp:DropDownList ID="deployStatus" runat="server" AutoPostBack="true" CssClass="dropdown">
+                        <asp:ListItem Value="">-- Select --</asp:ListItem>
+                        <asp:ListItem Value="patchmaster" Selected="True">patch master</asp:ListItem>
+                        <asp:ListItem Value="patchdeployed">patch deployed</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <!-- Search Button -->
+                      </div>
+                    <asp:Button ID="Button1" runat="server" Text="Search Patch" OnClick="Button1_Click" CssClass="btn-submit" /> 
+                    <asp:Label ID="label" runat="server" Text="" Visible="false"></asp:Label>
+                
           
-            <asp:Label ID="labelDeployOption" runat="server" Text="Select Deployment Status:" />
-            <asp:DropDownList ID="deployStatus" runat="server" AutoPostBack="true">
-                <asp:ListItem Value="">-- Select --</asp:ListItem>
-                <asp:ListItem Value="patchmaster" Selected="True">patch master</asp:ListItem>
-                <asp:ListItem Value="patchdeployed">patch deployed</asp:ListItem>
-            </asp:DropDownList>
-            <asp:Label ID ="label" runat="server" Text=""
-               visible="false"
-                ></asp:Label>
-      
-            <br /><br />
-  </div>
+            
             <!-- GridView -->
             <asp:GridView ID="GridView1" runat="server"
                 AutoGenerateColumns="False"
@@ -82,7 +84,7 @@
                 <Columns>
                     <asp:BoundField DataField="PatchID" HeaderText="Patch ID" />
                     <asp:BoundField DataField="PatchName" HeaderText="Patch Name" />
-                    <asp:BoundField DataField="Patch_For" HeaderText="Patch For" />
+                    <asp:BoundField DataField="PatchInfo" HeaderText="Patch For" />
                     <asp:BoundField DataField="Type" HeaderText="Type" />
                     <asp:BoundField DataField="IssueID" HeaderText="Issue ID" />
                     <asp:BoundField DataField="Client" HeaderText="Client" />
@@ -95,7 +97,7 @@
                 </Columns>
 
             </asp:GridView>
-
+        </div>
 
     </form>
 
