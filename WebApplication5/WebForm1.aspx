@@ -104,9 +104,9 @@
 
                 <div class="grid-item">
                     <asp:Label ID="Label7" runat="server" Text="Name:"></asp:Label>
-                    <input type="text" id="NameText" runat="server" class="form-control" />
+                    <input type="text" id="Pacth_Name" runat="server" class="form-control" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
-                        ControlToValidate="NameText" ErrorMessage="* Required"
+                        ControlToValidate="Pacth_Name" ErrorMessage="* Required"
                         ForeColor="Red" Display="Dynamic" />
                 </div>
 

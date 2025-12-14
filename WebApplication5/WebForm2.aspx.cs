@@ -107,7 +107,7 @@ namespace WebApplication5
 
             if (hasPatchFor)
             {
-                query += " AND Patch_For LIKE @patchinfos";
+                query += " AND PatchInfo LIKE @patchinfos";
                 parameters.Add(new SqlParameter("@patchinfos", "%" + patchInfoText + "%"));
             }
 

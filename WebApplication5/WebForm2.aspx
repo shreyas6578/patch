@@ -104,7 +104,7 @@
     <Columns>
         <asp:BoundField DataField="PatchID" HeaderText="Patch ID" />
         <asp:BoundField DataField="PatchName" HeaderText="Patch Name" />
-        <asp:BoundField DataField="Patch_For" HeaderText="Patch For" />
+        <asp:BoundField DataField="PatchInfo" HeaderText="Patch For" />
         <asp:BoundField DataField="Type" HeaderText="Type" />
         <asp:BoundField DataField="IssueID" HeaderText="Issue ID" />
         <asp:BoundField DataField="Client" HeaderText="Client" />
