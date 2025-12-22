@@ -13,25 +13,24 @@ namespace WebApplication5
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Do NOT bind anything here because page loads empty
+            // Do not bind anything here
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(patchid.Text))
             {
-                label.ForeColor = System.Drawing.Color.Red;
-                label.Visible = true;
-                label.Text = "Please enter Patch ID!";
+                output.Text = "Please enter Patch ID!";
+                output.ForeColor = System.Drawing.Color.Red;
+                output.Visible = true;
                 return;
             }
 
-            int patchID;
-            if (!int.TryParse(patchid.Text, out patchID))
+            if (!int.TryParse(patchid.Text, out int patchID))
             {
-                label.ForeColor = System.Drawing.Color.Red;
-                label.Visible = true;
-                label.Text = "Invalid Patch ID!";
+                output.Text = "Invalid Patch ID!";
+                output.ForeColor = System.Drawing.Color.Red;
+                output.Visible = true;
                 return;
             }
 
@@ -43,25 +42,39 @@ namespace WebApplication5
                 {
                     GridView1.DataSource = dt;
                     GridView1.DataBind();
-                    label.ForeColor = System.Drawing.Color.Green;
-                    label.Visible = true;
-                    label.Text = "record found!";
+
+                    output.Text = "Record found!";
+                    output.ForeColor = System.Drawing.Color.Green;
+                    output.Visible = true;
+
+                    using (SqlConnection con = new SqlConnection(conStr))
+                    {
+                        string query = "SELECT TestingStatus FROM PatchMaster WHERE PatchID = @patchID";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.Add("@patchID", SqlDbType.Int).Value = patchID;
+                            con.Open();
+
+                            object result = cmd.ExecuteScalar();
+                            Testing_Status.Text = result != null ? result.ToString() : string.Empty;
+                        }
+                    }
                 }
                 else
                 {
                     GridView1.DataSource = null;
                     GridView1.DataBind();
-                    label.ForeColor = System.Drawing.Color.Red;
-                    label.Visible = true;
-                    label.Text = "No record found!";
+
+                    output.Text = "No record found!";
+                    output.ForeColor = System.Drawing.Color.Red;
+                    output.Visible = true;
                 }
             }
             catch (Exception ex)
             {
-                Response.Write("Error: " + ex.Message);
-                label.ForeColor = System.Drawing.Color.Red;
-                label.Visible = true;
-                label.Text = "Error: "+ex.Message;
+                output.Text = "Error: " + ex.Message;
+                output.ForeColor = System.Drawing.Color.Red;
+                output.Visible = true;
             }
         }
 
@@ -71,15 +84,16 @@ namespace WebApplication5
 
             using (SqlConnection con = new SqlConnection(conStr))
             {
-                string query = "SELECT * FROM patchmaster WHERE PatchID = @patchID";
-
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@patchID", id);
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
+                string query = "SELECT * FROM PatchMaster WHERE PatchID = @patchID";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.Add("@patchID", SqlDbType.Int).Value = id;
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
             }
-
             return dt;
         }
 
@@ -87,10 +101,78 @@ namespace WebApplication5
         {
             GridView1.PageIndex = e.NewPageIndex;
 
-            // Re-bind with latest data
-            int id = int.Parse(patchid.Text);
-            GridView1.DataSource = GetPatchData(id);
-            GridView1.DataBind();
+            if (int.TryParse(patchid.Text, out int id))
+            {
+                GridView1.DataSource = GetPatchData(id);
+                GridView1.DataBind();
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                Save();
+            }
+        }
+
+        private void Save()
+        {
+            if (!int.TryParse(patchid.Text.Trim(), out int patchID))
+            {
+                output.Text = "Invalid Patch ID!";
+                output.ForeColor = System.Drawing.Color.Red;
+                output.Visible = true;
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Testing_Status.Text))
+            {
+                output.Text = "Testing Status cannot be empty!";
+                output.ForeColor = System.Drawing.Color.Red;
+                output.Visible = true;
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    string query = @"UPDATE PatchMaster
+                                     SET TestingStatus = @status
+                                     WHERE PatchID = @patchID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.Add("@status", SqlDbType.VarChar, 50)
+                                      .Value = Testing_Status.Text.Trim();
+                        cmd.Parameters.Add("@patchID", SqlDbType.Int)
+                                      .Value = patchID;
+
+                        con.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            output.Text = "Testing Status updated successfully!";
+                            output.ForeColor = System.Drawing.Color.Green;
+                            output.Visible = true;
+                        }
+                        else
+                        {
+                            output.Text = "Update failed. Patch not found.";
+                            output.ForeColor = System.Drawing.Color.Red;
+                            output.Visible = true;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                output.Text = "An error occurred while updating data.";
+                output.ForeColor = System.Drawing.Color.Red;
+                output.Visible = true;
+            }
         }
     }
 }

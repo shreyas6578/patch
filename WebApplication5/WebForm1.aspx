@@ -19,7 +19,8 @@
             <a href="WebForm1.aspx" class="active">Add Patch</a>
             <a href="WebForm2.aspx">View Patch</a>
             <a href="WebForm3.aspx">Update Patch</a>
-            <a href="#">Delete Patch</a>
+            <a href="WebForm4.aspx">Upload Patch</a>
+             <a href="WebForm5.aspx">Patch downloadh</a>
         </div>
 
         <!-- Content -->
@@ -28,7 +29,7 @@
             <div class="form-grid">
                 <!-- Row 1 -->
                 <div class="grid-item">
-                    <asp:Label ID="Label1" runat="server" Text="Date Deployed:"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Date Deployed"></asp:Label>
                     <input type="text" id="deployDate" runat="server" class="datepicker" placeholder="dd-mm-yyyy" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                         ControlToValidate="deployDate" ErrorMessage="* Required" 
@@ -38,18 +39,19 @@
                 <div class="grid-item">
                     <asp:Label ID="Label2" runat="server" Text="Client:"></asp:Label>
 
-                    <asp:DropDownList ID="ClientName" runat="server" CssClass="dropdown" AppendDataBoundItems="true">
+                    <asp:DropDownList ID="ClientName" runat="server" CssClass="dropdown" >
                         <asp:ListItem Text="-- Select Client --" Value="" />
                     </asp:DropDownList>
 
                     <asp:RequiredFieldValidator 
-                        ID="RequiredFieldValidator2" 
-                        runat="server" 
-                        ControlToValidate="ClientName"
-                        InitialValue=""         
-                        ErrorMessage="* Required" 
-                        ForeColor="Red" 
-                        Display="Dynamic" />
+                    ID="RequiredFieldValidator2" 
+                    runat="server" 
+                    ControlToValidate="ClientName"
+                    InitialValue=""
+                    ErrorMessage="* Required"
+                    ForeColor="Red"
+                    Display="Dynamic" />
+
                 </div>
 
                 <!-- Row 2 -->

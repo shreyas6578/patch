@@ -13,7 +13,7 @@ namespace WebApplication5
     public partial class WebForm1 : System.Web.UI.Page
     {
         static string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-
+        int data = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -26,13 +26,11 @@ namespace WebApplication5
         }
         private void getClientName()
         {
-            ClientName.Items.Clear(); // safety
+            ClientName.Items.Clear();
 
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = @"SELECT ClientID,
-                        (ClientName + ' (' + ClientAlias + ')') AS NAMES
-                        FROM ClientMaster";
+                string query = @"SELECT ClientID,ClientName + ' (' + ClientAlias + ')' AS NAMES FROM ClientMaster ORDER BY ClientName ASC";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
@@ -49,6 +47,7 @@ namespace WebApplication5
 
             ClientName.Items.Insert(0, new ListItem("-- Select Client --", ""));
         }
+
 
 
 
@@ -129,18 +128,40 @@ namespace WebApplication5
         {
             bool show = deployStatus.SelectedValue == "patchdeployed";
 
-            // Show/hide the containers
             patchIDContainer.Visible = show;
             deployedContainer.Visible = show;
 
-            // Enable/disable validators
             RequiredFieldValidator9.Enabled = show;
             RequiredFieldValidator11.Enabled = show;
             RegularExpressionValidator1.Enabled = show;
+
+            DeployData = show ? 1 : 0;
         }
+
 
         // ------------------------- Submit Button -------------------------
         protected void Button1_Click(object sender, EventArgs e)
+        {
+            
+            if (DeployData == 0)
+            {
+                pacthmasterinstered();
+            }
+            else
+            {
+                output.Text = "feature is not avablie";
+                output.ForeColor = System.Drawing.Color.Red;
+
+            }
+            
+        }
+        private int DeployData
+        {
+            get { return ViewState["DeployData"] == null ? 0 : (int)ViewState["DeployData"]; }
+            set { ViewState["DeployData"] = value; }
+        }
+
+        protected void pacthmasterinstered()
         {
             try
             {
@@ -157,30 +178,25 @@ namespace WebApplication5
                 string testingStatus = "";
                 string generatedPatchName = "";
 
-                // ----------- Generate PatchName (MaxID + "_" + PatchName) -----------
+                // ----------- Single Connection -----------
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT ISNULL(MAX(PatchID),0) FROM PatchMaster", con);
                     con.Open();
-                    int maxId = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    generatedPatchName = (maxId + 1) + "_" + patch_name;
-                }
-
-                // ----------- Insert Patch Record -----------
-                using (SqlConnection con = new SqlConnection(constr))
-                {
+                    // ----------- Insert and get the auto-generated PatchID -----------
                     string query = @"
-                         INSERT INTO PatchMaster 
-                    (PatchName, PatchInfo, Type, IssueID, Client, ReleaseDate,
-                     DeploymentDate, Environment, ReleasedBy, TestingStatus, ProjectName) 
-                    VALUES 
-                    (@PatchName, @Patch_For, @Type, @IssueID, @Client, @ReleaseDate, 
-                     @DeploymentDate, @Environment, @ReleasedBy, @TestingStatus, @ProjectName)";
+                INSERT INTO PatchMaster 
+                (PatchInfo, Type, IssueID, Client, ReleaseDate,
+                 DeploymentDate, Environment, ReleasedBy, TestingStatus, ProjectName) 
+                VALUES 
+                (@Patch_For, @Type, @IssueID, @Client, @ReleaseDate, 
+                 @DeploymentDate, @Environment, @ReleasedBy, @TestingStatus, @ProjectName);
+                 
+                SELECT SCOPE_IDENTITY();";  // Gets the newly generated PatchID
 
                     SqlCommand cmd = new SqlCommand(query, con);
 
-                    cmd.Parameters.AddWithValue("@PatchName", generatedPatchName);
+                    // Don't include PatchName in the initial insert
                     cmd.Parameters.AddWithValue("@Patch_For", patch_info);
                     cmd.Parameters.AddWithValue("@Type", TypeLists);
                     cmd.Parameters.AddWithValue("@IssueID", Issueid);
@@ -192,11 +208,21 @@ namespace WebApplication5
                     cmd.Parameters.AddWithValue("@TestingStatus", testingStatus);
                     cmd.Parameters.AddWithValue("@ProjectName", project_name);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
+                    // Execute and get the new auto-generated PatchID
+                    int newPatchId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    // Now create the PatchName using the actual PatchID
+                    generatedPatchName = newPatchId + "_" + patch_name;
+
+                    // ----------- Update with the generated PatchName -----------
+                    string updateQuery = "UPDATE PatchMaster SET PatchName = @PatchName WHERE PatchID = @PatchID";
+                    SqlCommand updateCmd = new SqlCommand(updateQuery, con);
+                    updateCmd.Parameters.AddWithValue("@PatchName", generatedPatchName);
+                    updateCmd.Parameters.AddWithValue("@PatchID", newPatchId);
+                    updateCmd.ExecuteNonQuery();
                 }
 
-                output.Text = "Patch saved successfully!.<br/>"+ generatedPatchName;
+                output.Text = "Patch saved successfully!.<br/>" + generatedPatchName;
                 output.ForeColor = System.Drawing.Color.Green;
             }
             catch (FormatException ex)
@@ -216,4 +242,6 @@ namespace WebApplication5
             }
         }
     }
+
+    
 }

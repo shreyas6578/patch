@@ -17,7 +17,8 @@
         <a href="WebForm1.aspx">Add Patch</a>
         <a href="WebForm2.aspx" class="active">View Patch</a>
         <a href="WebForm3.aspx">Update Patch</a>
-        <a href="#">Delete Patch</a>
+        <a href="WebForm4.aspx">Upload Patch</a>
+        <a href="WebForm5.aspx">Patch downloadh</a>
     </div>
 <!-- jQuery UI Datepicker CSS -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
