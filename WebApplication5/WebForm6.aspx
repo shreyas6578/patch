@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication5.WebForm2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm6.aspx.cs" Inherits="WebApplication5.WebForm6" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,8 +15,8 @@
     <div class="sidebar">
         <h3 class="menu-title">Patch Menu</h3>
         <a href="WebForm1.aspx">Add Patch</a>
-        <a href="WebForm2.aspx" class="active">View Patch(master)</a>
-        <a href="WebForm6.aspx" >View Patch(deployed) </a>
+        <a href="WebForm2.aspx">View Patch(master)</a>
+        <a href="WebForm6.aspx" class="active">View Patch(deployed) </a>
         <a href="WebForm3.aspx">Update Patch</a>
         <a href="WebForm4.aspx">Upload Patch</a>
         <a href="WebForm5.aspx">Patch download</a>
@@ -104,16 +104,16 @@
         OnPageIndexChanging="GridView1_PageIndexChanging">
 
     <Columns>
+        <asp:BoundField DataField="refernumber" HeaderText="ReferNumber" />
         <asp:BoundField DataField="PatchID" HeaderText="Patch ID" />
         <asp:BoundField DataField="PatchName" HeaderText="Patch Name" />
         <asp:BoundField DataField="PatchInfo" HeaderText="Patch For" />
+        <asp:BoundField DataField="Patchdeployedby" HeaderText="Patchdeployedby"/>
         <asp:BoundField DataField="Type" HeaderText="Type" />
         <asp:BoundField DataField="IssueID" HeaderText="Issue ID" />
         <asp:BoundField DataField="Client" HeaderText="Client" />
-        <asp:BoundField DataField="ReleaseDate" HeaderText="Release Date" 
-            DataFormatString="{0:dd-MMM-yyyy}" />
-        <asp:BoundField DataField="DeploymentDate" HeaderText="Deployment Date" 
-            DataFormatString="{0:dd-MMM-yyyy}" />
+        <asp:BoundField DataField="ReleaseDate" HeaderText="Release Date" DataFormatString="{0:dd-MMM-yyyy}" />
+        <asp:BoundField DataField="DeploymentDate" HeaderText="Deployment Date" DataFormatString="{0:dd-MMM-yyyy}" />
         <asp:BoundField DataField="Environment" HeaderText="Environment" />
         <asp:BoundField DataField="ReleasedBy" HeaderText="Released By" />
         <asp:BoundField DataField="TestingStatus" HeaderText="Testing Status" />

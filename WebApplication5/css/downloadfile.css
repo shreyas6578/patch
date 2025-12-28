@@ -1,0 +1,93 @@
+﻿/* =========================
+   File Grid - Main Table
+========================= */
+.file-grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 12px;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 2px solid #1976d2; /* Outer border */
+}
+
+    /* =========================
+   Header
+========================= */
+    .file-grid th {
+        background-color: #1976d2;
+        color: #ffffff;
+        padding: 10px;
+        font-weight: 600;
+        text-align: left;
+        border: 1px solid #125aa5;
+        white-space: nowrap;
+    }
+
+    /* =========================
+   Cells
+========================= */
+    .file-grid td {
+        padding: 8px 10px;
+        border: 1px solid #c7d4e8;
+        vertical-align: middle;
+        word-break: break-word;
+    }
+
+        /* =========================
+   Fix Right Border Cut Issue
+========================= */
+        .file-grid th:last-child,
+        .file-grid td:last-child {
+            border-right: 2px solid #1976d2;
+        }
+
+    /* =========================
+   Zebra Rows
+========================= */
+    .file-grid tr:nth-child(even) td {
+        background-color: #f5f9ff;
+    }
+
+    /* =========================
+   Hover Effect
+========================= */
+    .file-grid tr:hover td {
+        background-color: #eef4ff;
+    }
+
+    /* =========================
+   Action Column Center
+========================= */
+    .file-grid th:last-child,
+    .file-grid td:last-child {
+        text-align: center;
+        width: 120px;
+    }
+
+    /* =========================
+   Download Button
+========================= */
+    .file-grid .btn-submits {
+        padding: 6px 14px;
+        background-color: #1976d2;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+        .file-grid .btn-submits:hover {
+            background-color: #125aa5;
+        }
+
+    /* =========================
+   Empty Data Row
+========================= */
+    .file-grid .empty {
+        text-align: center;
+        padding: 15px;
+        font-weight: bold;
+        color: #666;
+    }

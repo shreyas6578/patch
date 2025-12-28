@@ -4,12 +4,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebApplication5
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class WebForm6 : System.Web.UI.Page
     {
         private static readonly string conStr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
 
@@ -32,7 +34,7 @@ namespace WebApplication5
             try
             {
                 using (SqlConnection con = new SqlConnection(conStr))
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM patchmaster ORDER BY PatchID DESC", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM patchdeployed ORDER BY refernumber DESC", con))
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
                     DataTable dt = new DataTable();
@@ -76,7 +78,7 @@ namespace WebApplication5
                 System.Diagnostics.Debug.WriteLine($"  ToDate: '{toDateText}'");
 
                 // Build dynamic query
-                string query = "SELECT * FROM patchmaster WHERE 1=1";
+                string query = "SELECT * FROM patchdeployed WHERE 1=1";
                 List<SqlParameter> parameters = new List<SqlParameter>();
 
                 // PatchID (integer)
@@ -114,7 +116,7 @@ namespace WebApplication5
                     // We need to handle both two-digit and four-digit years
                     if (TryParseDate(fromDateText, out DateTime fromDate))
                     {
-                        query += " AND ReleaseDate >= @FromDate";
+                        query += " AND DeploymentDate >= @FromDate";
                         SqlParameter fromParam = new SqlParameter("@FromDate", SqlDbType.Date);
                         fromParam.Value = fromDate;
                         parameters.Add(fromParam);
@@ -130,7 +132,7 @@ namespace WebApplication5
                 {
                     if (TryParseDate(toDateText, out DateTime toDate))
                     {
-                        query += " AND ReleaseDate <= @ToDate";
+                        query += " AND DeploymentDate <= @ToDate";
                         SqlParameter toParam = new SqlParameter("@ToDate", SqlDbType.Date);
                         toParam.Value = toDate;
                         parameters.Add(toParam);
@@ -143,7 +145,7 @@ namespace WebApplication5
                 }
 
                 // Final ordering
-                query += " ORDER BY PatchID DESC";
+                query += " ORDER BY refernumber DESC";
 
                 // Execute query
                 using (SqlConnection con = new SqlConnection(conStr))
@@ -211,4 +213,5 @@ namespace WebApplication5
 
 
     }
+
 }

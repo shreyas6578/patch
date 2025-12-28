@@ -19,10 +19,11 @@
     <div class="sidebar">
         <h3 class="menu-title">Patch Menu</h3>
         <a href="WebForm1.aspx">Add Patch</a>
-        <a href="WebForm2.aspx">View Patch</a>
+        <a href="WebForm2.aspx">View Patch(master)</a>
+        <a href="WebForm6.aspx" >View Patch(deployed) </a>
         <a href="WebForm3.aspx" class="active">Update Patch</a>
         <a href="WebForm4.aspx">Upload Patch</a>
-         <a href="WebForm5.aspx">Patch downloadh</a>
+         <a href="WebForm5.aspx">Patch download</a>
     </div>
 
     <!-- ONLY ONE SERVER FORM -->
@@ -59,8 +60,8 @@
                     <asp:Label ID="labelDeployOption" runat="server" Text="Select Deployment Status:" />
                     <asp:DropDownList ID="deployStatus" runat="server" CssClass="dropdown">
                         <asp:ListItem Value="">-- Select --</asp:ListItem>
-                        <asp:ListItem Value="patchmaster">Patch Master</asp:ListItem>
-                        <asp:ListItem Value="patchdeployed">Patch Deployed</asp:ListItem>
+                        <asp:ListItem Value="patchmaster" Selected="True">Patch Master</asp:ListItem>
+<%--                        <asp:ListItem Value="patchdeployed">Patch Deployed</asp:ListItem>--%>
                     </asp:DropDownList>
                 </div>
 

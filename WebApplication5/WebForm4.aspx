@@ -13,10 +13,11 @@
     <div class="sidebar">
         <h3 class="menu-title">Patch Menu</h3>
         <a href="WebForm1.aspx">Add Patch</a>
-        <a href="WebForm2.aspx">View Patch</a>
+        <a href="WebForm2.aspx">View Patch(master)</a>
+        <a href="WebForm6.aspx" >View Patch(deployed) </a>
         <a href="WebForm3.aspx">Update Patch</a>
         <a href="WebForm4.aspx" class="active">Upload Patch</a>
-        <a href="WebForm5.aspx">Patch downloadh</a>
+        <a href="WebForm5.aspx">Patch download</a>
     </div>
 
 <div class="content">

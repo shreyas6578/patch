@@ -13,7 +13,7 @@ namespace WebApplication5
     public partial class WebForm1 : System.Web.UI.Page
     {
         static string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-        int data = 0;
+ 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -149,9 +149,9 @@ namespace WebApplication5
             }
             else
             {
-                output.Text = "feature is not avablie";
-                output.ForeColor = System.Drawing.Color.Red;
-
+                //output.Text = "feature is not avablie";
+                //output.ForeColor = System.Drawing.Color.Red;
+                pacthdeployedinstered();
             }
             
         }
@@ -160,7 +160,76 @@ namespace WebApplication5
             get { return ViewState["DeployData"] == null ? 0 : (int)ViewState["DeployData"]; }
             set { ViewState["DeployData"] = value; }
         }
+        protected void pacthdeployedinstered()
+        {
+            try
+            {
+                DateTime deployDateValue = DateTime.ParseExact(deployDate.Value, "dd-MM-yyyy", null);
+                string clientname = ClientName.SelectedItem.Text;
+                string project_name = ProjectList.SelectedValue;
+                DateTime releaseDateValue = DateTime.ParseExact(ReleaseDate.Value, "dd-MM-yyyy", null);
+                string releasedBy = ReleasedBy.Value;
+                int Issueid = Convert.ToInt32(issueid.Value);
+                string environment = EnvironmentList.SelectedItem.Text;
+                string patch_name = Pacth_Name.Value;
+                string patch_info = PatchInfo1.Value;
+                string TypeLists = TypeList.SelectedItem.Text;
+                string testingStatus = "";
+                int patchid = Convert.ToInt32(patchID.Value);
+                string deployedname = deployed.Value;
 
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    con.Open();
+
+                    string query = @"
+                INSERT INTO patchdeployed 
+                (PatchName, PatchInfo, Type, IssueID, Client, ReleaseDate,
+                 DeploymentDate, Environment, ReleasedBy, TestingStatus, ProjectName, PatchID, Patchdeployedby) 
+                VALUES 
+                (@PatchName, @Patch_For, @Type, @IssueID, @Client, @ReleaseDate, 
+                 @DeploymentDate, @Environment, @ReleasedBy, @TestingStatus, @ProjectName, @PatchID, @Patchdeployedby)";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@PatchName", patch_name);
+                    cmd.Parameters.AddWithValue("@Patch_For", patch_info);
+                    cmd.Parameters.AddWithValue("@Type", TypeLists);
+                    cmd.Parameters.AddWithValue("@IssueID", Issueid);
+                    cmd.Parameters.AddWithValue("@Client", clientname);
+                    cmd.Parameters.AddWithValue("@ReleaseDate", releaseDateValue);
+                    cmd.Parameters.AddWithValue("@DeploymentDate", deployDateValue);
+                    cmd.Parameters.AddWithValue("@Environment", environment);
+                    cmd.Parameters.AddWithValue("@ReleasedBy", releasedBy);
+                    cmd.Parameters.AddWithValue("@TestingStatus", testingStatus);
+                    cmd.Parameters.AddWithValue("@ProjectName", project_name);
+                    cmd.Parameters.AddWithValue("@PatchID", patchid);
+                    cmd.Parameters.AddWithValue("@Patchdeployedby", deployedname);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                output.Text = "Patch saved successfully!.<br/>";
+                output.ForeColor = System.Drawing.Color.Green;
+            }
+            catch (FormatException ex)
+            {
+                output.Text = "Error: Issue ID or Date format is invalid.<br/>" + ex.Message;
+                output.ForeColor = System.Drawing.Color.Red;
+            }
+            catch (SqlException ex)
+            {
+                output.Text = "Database Error: " + ex.Message;
+                output.ForeColor = System.Drawing.Color.Red;
+            }
+            catch (Exception ex)
+            {
+                output.Text = "Unexpected Error: " + ex.Message;
+                output.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+        
+        
         protected void pacthmasterinstered()
         {
             try

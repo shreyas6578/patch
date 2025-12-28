@@ -7,17 +7,18 @@
     <title>Patch download</title>
     <link rel="stylesheet" type="text/css" href="css/StyleSheet1.css" />
     <link rel="stylesheet" type="text/css" href="css/Datepicker.css" />
-    <link rel="stylesheet"type ="text/css" href="css/gridview.css" />
+    <link rel="stylesheet"type ="text/css" href="css/downloadfile.css" />
 </head>
 <body>
     <form id="form1" runat="server">
           <div class="sidebar">
         <h3 class="menu-title">Patch Menu</h3>
         <a href="WebForm1.aspx">Add Patch</a>
-        <a href="WebForm2.aspx">View Patch</a>
-        <a href="WebForm3.aspx">Update Patch</a>
+        <a href="WebForm2.aspx">View Patch(master)</a>
+        <a href="WebForm6.aspx" >View Patch(deployed) </a>
+              <a href="WebForm3.aspx">Update Patch</a>
         <a href="WebForm4.aspx" >Upload Patch</a>
-        <a href="WebForm5.aspx" class="active">Patch downloadh</a>
+        <a href="WebForm5.aspx" class="active">Patch download</a>
     </div>
         <div class="content">
     <h2>Patch downloadh</h2>
@@ -28,13 +29,15 @@
             <asp:Button ID="GO" runat="server" Text="Go" CssClass="nav-btn" OnClick="GO_Click" />
             <asp:Button ID="back" runat="server" Text="Back" CssClass="nav-btn" OnClick="back_Click" />
         </div>
-        <asp:GridView 
+<br />
+        <asp:Label ID="lblMessage" runat="server" CssClass="upload-path" />
+<asp:GridView 
     ID="gvFiles"
     runat="server"
     AutoGenerateColumns="False"
     CssClass="file-grid"
     OnRowCommand="gvFiles_RowCommand">
-
+    
     <Columns>
         <asp:BoundField 
             DataField="FileName" 
@@ -46,14 +49,14 @@
                     ID="btnDownload"
                     runat="server"
                     Text="Download"
-                    CssClass="btn-submit"
+                    CssClass="btn-submits"
                     CommandName="Download"
                     CommandArgument='<%# Eval("FilePath") %>' />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>
-
 </asp:GridView>
+
         </div>
     </form>
 </body>

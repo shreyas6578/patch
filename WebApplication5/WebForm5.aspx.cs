@@ -52,6 +52,7 @@ namespace WebApplication5
             {
                 ddlFolders.Items.Add(Path.GetFileName(dir));
             }
+            lblMessage.Text = "Current Path: /Uploads/" + CurrentPath;
         }
 
         // ===============================
@@ -79,6 +80,7 @@ namespace WebApplication5
 
             gvFiles.DataSource = files;
             gvFiles.DataBind();
+            lblMessage.Text = "Current Path: /Uploads/" + CurrentPath;
         }
 
         // ===============================
@@ -97,6 +99,7 @@ namespace WebApplication5
 
             BindFolders();
             BindFiles();
+            lblMessage.Text = "Current Path: /Uploads/" + CurrentPath;
         }
 
         // ===============================
@@ -114,6 +117,7 @@ namespace WebApplication5
 
             BindFolders();
             BindFiles();
+            lblMessage.Text = "Current Path: /Uploads/" + CurrentPath;
         }
 
         // ===============================

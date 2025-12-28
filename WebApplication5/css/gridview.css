@@ -1,58 +1,84 @@
-﻿/* Main GridView */
+﻿/* =========================
+   GridView Container
+========================= */
 .gridview {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     font-size: 13px;
     margin-top: 10px;
-    border: 1px solid #2f5da8; /* Outer border */
+    border: 2px solid #2f5da8; /* STRONG outer border */
+    background-color: #ffffff;
 }
 
-/* Header */
-.gridview th {
-    background-color: #1976d2;
-    color: white;
-    padding: 8px;
-    font-weight: bold;
-    text-align: left;
-    font-size: 14px;
-    border: 1px solid #2f5da8;   /* clean sharp border */
-    white-space: nowrap;
-}
+    /* =========================
+   Header
+========================= */
+    .gridview th {
+        background-color: #1976d2;
+        color: #ffffff;
+        padding: 8px;
+        font-weight: bold;
+        font-size: 13px;
+        text-align: center;
+        border: 1px solid #2f5da8;
+        white-space: nowrap;
+    }
 
-/* Row Cells */
-.gridview td {
-    padding: 6px;
-    border: 1px solid #b9c7d9;   /* softer but visible */
-    white-space: normal;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    max-width: 140px;            /* controls width */
-}
+    /* =========================
+   Data Cells
+========================= */
+    .gridview td {
+        padding: 6px;
+        border: 1px solid #b9c7d9;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        vertical-align: top;
+    }
 
-/* Hover effect */
-.gridview tr:hover td {
-    background-color: #eef5ff;
-}
+        /* =========================
+   Force Right Border Fix
+========================= */
+        .gridview th:last-child,
+        .gridview td:last-child {
+            border-right: 2px solid #2f5da8;
+        }
 
-/* Paging links */
-.gridview a {
-    padding: 6px 10px;
-    margin-right: 5px;
-    border: 1px solid #1976d2;
-    color: #1976d2;
-    border-radius: 4px;
-    text-decoration: none;
-}
+    /* =========================
+   Zebra Rows
+========================= */
+    .gridview tr:nth-child(even) td {
+        background-color: #f7faff;
+    }
 
-.gridview a:hover {
-    background: #1976d2;
-    color: white;
-}
+    /* =========================
+   Hover
+========================= */
+    .gridview tr:hover td {
+        background-color: #eef5ff;
+    }
 
-.gridview span {
-    padding: 6px 10px;
-    background: #1976d2;
-    color: white;
-    border-radius: 4px;
-}
+    /* =========================
+   Paging
+========================= */
+    .gridview a {
+        padding: 5px 9px;
+        margin-right: 5px;
+        border: 1px solid #1976d2;
+        color: #1976d2;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+        .gridview a:hover {
+            background-color: #1976d2;
+            color: #ffffff;
+        }
+
+    .gridview span {
+        padding: 5px 9px;
+        background-color: #1976d2;
+        color: #ffffff;
+        border-radius: 4px;
+    }
