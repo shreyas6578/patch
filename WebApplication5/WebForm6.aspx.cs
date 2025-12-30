@@ -72,7 +72,8 @@ namespace WebApplication5
                 string patchInfoText = pacthinfo.Text.Trim();
                 string fromDateText = fromdate.Value;
                 string toDateText = todate.Value;
-
+                string Deployed = Deployed_By.Text.Trim();
+                string project = Project_.Text.Trim(); 
                 System.Diagnostics.Debug.WriteLine($"DEBUG - Input values:");
                 System.Diagnostics.Debug.WriteLine($"  FromDate: '{fromDateText}'");
                 System.Diagnostics.Debug.WriteLine($"  ToDate: '{toDateText}'");
@@ -80,6 +81,7 @@ namespace WebApplication5
                 // Build dynamic query
                 string query = "SELECT * FROM patchdeployed WHERE 1=1";
                 List<SqlParameter> parameters = new List<SqlParameter>();
+                
 
                 // PatchID (integer)
                 if (int.TryParse(patchIdText, out int patchId))
@@ -100,6 +102,19 @@ namespace WebApplication5
                 {
                     query += " AND PatchName LIKE @PatchName";
                     parameters.Add(new SqlParameter("@PatchName", "%" + patchNameText + "%"));
+                }
+                // Deployed (string with wildcard search)
+                if (!string.IsNullOrWhiteSpace(Deployed))
+                {
+                    query += " AND Patchdeployedby LIKE @Deployed";
+                    parameters.Add(new SqlParameter("@Deployed", "%" + Deployed + "%"));
+                }
+
+                // Project (string with wildcard search)
+                if (!string.IsNullOrWhiteSpace(project))
+                {
+                    query += " AND ProjectName LIKE @ProjectName";
+                    parameters.Add(new SqlParameter("@ProjectName", "%" + project + "%"));
                 }
 
                 // PatchInfo (string with wildcard search)

@@ -150,6 +150,42 @@ namespace WebApplication5
         protected global::System.Web.UI.HtmlControls.HtmlInputText todate;
 
         /// <summary>
+        /// label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label7;
+
+        /// <summary>
+        /// Deployed_By control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Deployed_By;
+
+        /// <summary>
+        /// label8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label8;
+
+        /// <summary>
+        /// Project_ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Project_;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>

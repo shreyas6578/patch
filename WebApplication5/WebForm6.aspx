@@ -90,6 +90,14 @@
                 <asp:Label ID="label6" runat="server" Text="To Date :"></asp:Label>
                 <input type="text" id="todate" runat="server" placeholder="dd-mm-yyyy" />
             </div>
+                <div class="grid-item">
+                <asp:Label ID="label7" runat="server" Text="Deployed By :"></asp:Label>
+                <asp:TextBox ID="Deployed_By" runat="server"></asp:TextBox>
+            </div>
+                <div class="grid-item">
+                <asp:Label ID="label8" runat="server" Text="Project :"></asp:Label>
+                <asp:TextBox ID="Project_" runat="server"></asp:TextBox>
+            </div>
         </div>
   <br />
         <!-- Button -->
@@ -108,7 +116,7 @@
         <asp:BoundField DataField="PatchID" HeaderText="Patch ID" />
         <asp:BoundField DataField="PatchName" HeaderText="Patch Name" />
         <asp:BoundField DataField="PatchInfo" HeaderText="Patch For" />
-        <asp:BoundField DataField="Patchdeployedby" HeaderText="Patchdeployedby"/>
+        <asp:BoundField DataField="Patchdeployedby" HeaderText="Deployed By"/>
         <asp:BoundField DataField="Type" HeaderText="Type" />
         <asp:BoundField DataField="IssueID" HeaderText="Issue ID" />
         <asp:BoundField DataField="Client" HeaderText="Client" />
